@@ -1,0 +1,29 @@
+{
+  "name": "mmmarkdown",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "start:dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pporche87/Mmmarkdown.git"
+  },
+  "author": "Patrick Porche <pporche87@gmail.com> (http://pporche87.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pporche87/Mmmarkdown/issues"
+  },
+  "homepage": "https://github.com/pporche87/Mmmarkdown#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "pug": "^2.0.0-rc.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-plugin-react": "^7.1.0"
+  }
+}
