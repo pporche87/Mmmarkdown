@@ -1,0 +1,38 @@
+.container-fluid
+  .row.logo-row
+    .col-md-4.other-class
+      div
+        ul.document-name
+          li.document
+            h4
+              | Groceries.md
+              span
+                i.fa.fa-trash(aria-hidden='true')
+          li.document
+            h4
+              | Todos.md
+              span
+                i.fa.fa-trash(aria-hidden='true')
+          li.document.document-hover
+            h4
+              | ExampleFile.md
+              span
+                i.fa.fa-trash(aria-hidden='true')
+          li.document
+            h4
+              | Blog.md
+              span
+                i.fa.fa-trash(aria-hidden='true')
+          li.document
+            h4
+              | Draft.md
+              span
+                i.fa.fa-trash(aria-hidden='true')
+        ul.document-name
+          li.document.new-file
+            h4
+              | Groceries.md
+              span
+                i.fa.fa-plus(aria-hidden='true')
+        a#fork-github(href='#') Fork me on GitHub
+    include editor.pug 
