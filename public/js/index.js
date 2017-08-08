@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(marked('I am using __markdown__.'))
+  const markdownTextarea = document.querySelector('.text-area.left')
+  const outputTextarea = document.querySelector('.text-area.right')
 
+  markdownTextarea.addEventListener('keyup', (event) => {
+    outputTextarea.innerHTML = marked(event.target.value)
   })
+
 })
 
 // event handler on change execute function
