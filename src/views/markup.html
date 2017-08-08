@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="../../public/style.css">
+		<script type="text/javascript" src="../../public/markup.js"></script>
+		</head>
+		<body>
+
+		<!-- HEADER -->
+		<div class="container-fluid header">
+			<div class="row logo-row">
+				<div class="col-md-4 logo">
+					<div>
+						<h4>mmmarkdown</h4>
+						<p class="tag"><em>a yummy markdown editor</em></p>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="row navigation">
+						<div class="menu">
+							<h4>ExampleFile.md</h4>
+							<div class="links">
+								<p id=word-count>183 words</p>
+								<p id="save">Save</p>
+							</div>
+						</div>
+					</div>
+					<div class="row mark-prev">
+						<div class="col-md-6 markdown">
+							<h4>MARKDOWN</h4>
+						</div>
+						<div class="col-md-6 preview">
+							<h4>PREVIEW</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- SIDEBAR -->
+		<div class="container-fluid">
+			<div class="row logo-row body-height">
+				<div class="col-md-4 other-class">
+					<div>
+						<ul class="document-name">
+							<li class="document"><h4>Groceries.md<span><i class="fa fa-trash" aria-hidden="true"></i></span></h4></li>
+							<li class="document"><h4>Todos.md<span><i class="fa fa-trash" aria-hidden="true"></i></span></h4></li>
+							<li class="document document-hover"><h4>ExampleFile.md<span><i class="fa fa-trash" aria-hidden="true"></i></span></h4></li>
+							<li class="document"><h4>Blog.md<span><i class="fa fa-trash" aria-hidden="true"></i></span></h4></li>
+							<li class="document"><h4>Draft.md<span><i class="fa fa-trash" aria-hidden="true"></i></span></h4></li>
+						</ul>
+						<ul class="document-name">
+							<li class="document new-file"><h4>Groceries.md<span><i class="fa fa-plus" aria-hidden="true"></i></span></h4></li>
+						</ul>
+						<a id="fork-github" href="#">Fork me on GitHub</a>
+					</div>
+				</div>
+
+				<!-- EDITOR -->
+				<div class="col-md-8">
+					<div class="row body-height">
+						<div class="col-md-6 input">
+							<textarea name="text-area" class="text-area left" rows="50" cols="80"></textarea>
+						</div>
+
+						<!-- PREVIEW -->
+						<div class="col-md-6 input">
+							<!-- <textarea name="text-area" class="text-area left" rows="50" cols="80"></textarea> -->
+							<div class="right"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.slim.js"
+	  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+	  crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+</html>
