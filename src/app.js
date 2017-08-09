@@ -39,9 +39,9 @@ app.post('/saveFile', (request, response) => {
 
 app.get('/markdowns', (request, response) => {
   markdowns.getMarkdowns()
-  .then( result => {
-    response.send(result)
-  })
+    .then( result => {
+      response.send(result)
+    })
 })
 
 const port = process.env.PORT || 3000
