@@ -1,3 +1,11 @@
+# Overview
+
+Mmmarkdown is a markdown editor app that transforms markdown plain text into a markdown preview in real time. This application transforms markdown into HTML in order to be rendered in its preview.
+
+The application uses `Node.js` and `Express.js` to build a full-stack application that runs on both the server and the client.
+
+The application makes use of `Knex.js` for it's database configuration, `cookie-session` to establish a cookie session, and `pug` as its HTML templating language.
+
 # Installation  
 
 type the following in your terminal
