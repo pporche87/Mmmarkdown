@@ -1,3 +1,21 @@
+# Installation  
+
+type the following in your terminal
+```
+$ npm install
+$ brew services start postgresql
+$ npm run db:init
+$ npm run migrate:latest
+$ npm run start:dev
+```
+
+or if you just want to copy and paste a single command paste this:  
+`npm i && brew services start postgresql; npm run db:init && npm run migrate:latest && npm run start:dev`
+
+alternatively you can simply type:
+`npm run setup`
+
+
 # Mmmarkdown (387)
 
 ## Skills

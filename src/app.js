@@ -3,19 +3,13 @@ const app = express()
 const path = require('path')
 const fs = require('fs')
 const bodyParser = require('body-parser')
-// const cookieSession = require('cookie-session')
+const markdowns = require('./models/markdowns')
 require('dotenv').config()
 
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(bodyParser.json())
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
-
-// app.use(cookieSession({
-//   name: 'session',
-//   secret: 'keyboard cat',
-//   maxAge: 24 * 60 * 60 * 1000
-// }))
 
 app.get('/', (request, response) => {
   let dir = __dirname + '/data/'
@@ -43,8 +37,15 @@ app.post('/saveFile', (request, response) => {
   response.sendStatus(200)
 })
 
+app.get('/markdowns', (request, response) => {
+  markdowns.getMarkdowns()
+  .then( result => {
+    response.send(result)
+  })
+})
+
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
-  console.log(`App listening on: ${process.env.APPLICATION_URL}:${port}`)
+  console.log(`App listening on: ${process.env.APPLICATION_URL}:${port}`) // eslint-disable-line no-console
 })
