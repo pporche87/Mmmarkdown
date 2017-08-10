@@ -20,7 +20,9 @@ app.use('/', (request, response, next) => {
   next()
 })
 
-app.use('/', require('./server/routes'))
+require('../test/tests.js')() // TODO: Replace quick tests with mocha-chai unit tests and use seperate database for testing
+
+// app.use('/', require('./server/routes'))
 
 app.use((request, response) => {
   response.render('not_found')

@@ -1,20 +1,25 @@
 const router = require('express').Router()
-const fs = require('fs')
 const Markdowns = require('../../models/markdowns')
 
 router.get('/:fileName', (request, response) => {
-  let dir = __dirname + '/data/' + request.params.fileName
-
-  fs.readFile(dir, 'utf8', (error, contents) => {
-    if (error) throw error
-    response.send({ fileText: contents })
-  })
+  Markdowns.getMarkdown(request.params.fileName)
+    .then( fileInfo => {
+      response.send(fileInfo)
+    })
 })
 
 router.get('/', (request, response) => {
   Markdowns.getMarkdowns()
-    .then( result => {
-      response.send(result)
+    .then( fileNames => {
+      response.send(fileNames)
+    })
+})
+
+router.get('/saveFile', (request, response) => {
+  Markdowns.createMarkdown(request.body.fileName, request.body.fileText)
+    .then( () => {
+      console.log('Succeeded')
+      response.sendStatus(200)
     })
 })
 
