@@ -58,7 +58,7 @@ const renderFileFromSidebar = () => {
 
 const saveFile = () => {
   const port = 3000
-  const url = `http://127.0.0.1:${port}/saveFile`
+  const url = `http://127.0.0.1:${port}/markdowns/saveFile`
   const readmeFile = {
     fileName: $('.menu h4').text(),
     fileText: $('.text-area.editor').val()
@@ -74,7 +74,7 @@ const deleteFile = () => {
     const fileName = event.target.parentElement.parentElement.innerText
     const liToDelete = event.target.parentElement.parentElement.parentElement
     const port = 3000
-    const url = `http://127.0.0.1:${port}/delete/${fileName}`
+    const url = `http://127.0.0.1:${port}/markdowns/${fileName}/delete`
     fetch(url, {
       method: 'DELETE',
       headers: {
@@ -116,7 +116,7 @@ const postToServer = (url, readmeFile) => {
 const fetchFileFromCookie = (fileName) => {
   $('.menu h4').text(fileName)
   const port = 3000
-  const url = `http://127.0.0.1:${port}/${fileName}`
+  const url = `http://127.0.0.1:${port}/markdowns/${fileName}`
   fetch(url, {
     method: 'GET',
     headers: {

@@ -12,6 +12,13 @@ The application makes use of `Knex.js` for it's database configuration, `cookie-
 
 # Installation  
 
+Grab the `.env` configuration file / options from the owner of this repo (preferrentially through slack)
+download the file to the root of this project, or alternatively, copy the options and type:  
+`echo pbpaste > .env`
+
+Recommended that you set your NODE_ENV environment variable to 'development' with:  
+`export NODE_ENV=development`
+
 type the following in your terminal
 ```
 $ npm install
