@@ -2,6 +2,7 @@ $(document).ready(() => {
   initializeTextArea()
   initializeSaveButton()
   cookieCheck()
+  newFile()
 })
 
 const initializeTextArea = () => {
@@ -20,6 +21,20 @@ const populatePreview = () => {
 const initializeSaveButton = () => {
   $('#save-button').click(() => {
     saveFile()
+  })
+}
+
+const newFile = () => {
+  // const headerReadmeFilename = $('.menu h4')
+  console.log('initialized');
+  $('.new-file').click(() => {
+    const newFileName = prompt('Name your markdown file')
+
+    $('.menu h4').html(newFileName)
+    $('.text-area.editor').val('')
+    $('.render-list').append(`<li class="document"><h4>${newFileName}<span><i class="fa fa-trash"></i></span></h4></li>`)
+    populatePreview()
+
   })
 }
 
