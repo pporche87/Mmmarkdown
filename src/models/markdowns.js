@@ -48,10 +48,21 @@ const createMarkdown = (file_name, file_content) =>
       else throw error
     })
 
+const deleteMarkdownByFilename = file_name =>
+  Promise.all([
+    util.promisify(fs.unlink)(path.join(__dirname, '../data/', file_name)),
+    markdowns.deleteMarkdownByFilename(file_name)
+  ])
+    .then( results => ({unlink: results[0], dbDelete: results[1]}))
+    .then( ({unlink, dbDelete}) => {
+      console.log('debug', unlink, dbDelete)
+      return dbDelete
+    })
+
 module.exports = {
   getMarkdowns,
   getMarkdown,
   createMarkdown,
-  deleteMarkdownByFilename: markdowns.deleteMarkdownByFilename,
+  deleteMarkdownByFilename,
   syncFileSystemToMarkdowns
 }
