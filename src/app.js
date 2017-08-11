@@ -17,7 +17,7 @@ app.get('/', (request, response) => {
     if (error) {
       throw error
     } else {
-			console.log(files);
+      console.log(files);
       response.render('index', {files: files})
     }
   })
@@ -29,6 +29,15 @@ app.get('/:fileName', (request, response) => {
   fs.readFile(dir, 'utf8', (error, contents) => {
     if (error) throw error
     response.send({ fileText: contents })
+  })
+})
+
+app.delete('/delete/:fileName', (request, response) => {
+  let dir = __dirname + '/data/' + request.params.fileName
+
+  fs.unlink(dir, (error) => {
+    if (error) throw error
+    response.sendStatus(200)
   })
 })
 
