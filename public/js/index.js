@@ -1,31 +1,24 @@
+/* global $ */
+/* global marked */
+/* global countWords */
+
 $(document).ready(() => {
   initializeTextArea()
   initializeSaveButton()
   cookieCheck()
   newFile()
   renderFileFromSidebar()
-  deleteFile()
-  // countWords()
+  setupDeleteFileHandler()
 })
 
 const initializeTextArea = () => {
   const editor = $('.text-area.editor')
 
   editor.keyup(populatePreview)
-
 }
 
-const countWords = () => {
-  let wordCount = $('.text-area.editor').val()
-  // console.log(wordCount);
-  wordCount = wordCount.replace(/(^\s*)|(\s*$)/gi,'')
-  wordCount = wordCount.replace(/[ ]{2,}/gi,' ')
-  wordCount = wordCount.replace(/\n /,'\n')
-  // console.log(wordCount.replace(/(^\s*)|(\s*$)/gi,''));
-  // console.log(wordCount.replace(/[ ]{2,}/gi,' '));
-  // console.log(wordCount.replace(/\n /,'\n'));
-  console.log(wordCount.split(' ').length);
-  $('#word-count').html(`${wordCount.split(' ').length} words`)
+const updateWordCount = () => {
+  $('#word-count').html(`${countWords( $('.text-area.editor').val() )} words`)
 }
 
 const populatePreview = () => {
@@ -33,7 +26,7 @@ const populatePreview = () => {
   const preview = $('.text-area.preview')
 
   preview.html(marked(editor.val()))
-  countWords()
+  updateWordCount()
 }
 
 const initializeSaveButton = () => {
@@ -50,16 +43,15 @@ const newFile = () => {
     $('.text-area.editor').val('')
     $('.render-list').append(`<li class="document"><h4>${newFileName}<span><i class="fa fa-trash"></i></span></h4></li>`)
 
-    deleteFile()
+    renderFileFromSidebar()
+    setupDeleteFileHandler()
     populatePreview()
   })
 }
 
 const renderFileFromSidebar = () => {
-  $('ul.render-list li h4').click((event) => {
-    const fileToRenderName = event.target.innerText
-
-    fetchFileFromCookie(fileToRenderName)
+  $('ul.render-list li h4').off('click').click((event) => {
+    fetchFileFromCookie(event.target.innerText)
   })
 }
 
@@ -70,17 +62,18 @@ const saveFile = () => {
     fileName: $('.menu h4').text(),
     fileText: $('.text-area.editor').val()
   }
+  alert(`Save file: ${readmeFile.fileName}`)
   Cookies.set('fileName', readmeFile.fileName, { expires: 30 })
   postToServer(url, readmeFile)
 }
 
-const deleteFile = () => {
+const setupDeleteFileHandler = () => {
   $('ul.render-list li span').click((event) => {
     event.stopPropagation()
     const fileName = event.target.parentElement.parentElement.innerText
     const liToDelete = event.target.parentElement.parentElement.parentElement
     const port = 3000
-    const url = `http://127.0.0.1:${port}/delete/${fileName}`
+    const url = `http://127.0.0.1:${port}/markdowns/${fileName}/delete`
     fetch(url, {
       method: 'DELETE',
       headers: {
@@ -95,7 +88,7 @@ const deleteFile = () => {
           $('.text-area.editor').val('')
           populatePreview()
         } else {
-          console.log('Error')
+          console.log('Error') // eslint-disable-line no-console
         }
       })
   })
@@ -112,10 +105,10 @@ const postToServer = (url, readmeFile) => {
     body: JSON.stringify(readmeFile)
   })
     .then(() => {
-      console.log(`${readmeFile.fileName} was saved to the server.`)
+      console.log(`${readmeFile.fileName} was saved to the server.`) // eslint-disable-line no-console
     })
     .catch((error) => {
-      console.log(`There was an error saving ${readmeFile.fileName} to the server. Error: ${error}`)
+      console.log(`There was an error saving ${readmeFile.fileName} to the server. Error: ${error}`) // eslint-disable-line no-console
     })
 }
 
@@ -130,17 +123,15 @@ const fetchFileFromCookie = (fileName) => {
       'Content-Type': 'application/json'
     }
   })
-    .then(fileContent => {
-      return fileContent.json()
-    })
+    .then(fileContent => fileContent.json() )
     .then((fileContent) => {
       const markdownText = $('.text-area.editor')
 
-      markdownText.text(fileContent.fileText)
+      markdownText.val(fileContent.fileText)
       populatePreview()
     })
     .catch((error) => {
-      console.log(`There was an error fetching the file content from the file. ${error}`)
+      console.log(`There was an error fetching the file content from the file. ${error}`) // eslint-disable-line no-console
       throw error
     })
 }

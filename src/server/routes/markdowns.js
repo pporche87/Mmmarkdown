@@ -4,7 +4,7 @@ const Markdowns = require('../../models/markdowns')
 router.get('/:fileName', (request, response) => {
   Markdowns.getMarkdown(request.params.fileName)
     .then( fileInfo => {
-      response.send({fileInfo})
+      response.send(fileInfo)
     })
 })
 
@@ -20,6 +20,15 @@ router.post('/saveFile', (request, response) => {
     .then( () => {
       console.log('Succeeded')
       response.sendStatus(200)
+    })
+})
+
+router.delete('/:fileName/delete', (request, response) => {
+  Markdowns.deleteMarkdownByFilename(request.params.fileName)
+    .then( res => {
+      (res)
+        ? response.send(res)
+        : response.sendStatus(500)
     })
 })
 
