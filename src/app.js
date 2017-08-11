@@ -24,9 +24,7 @@ app.use('/', (request, response, next) => {
 
 require('./models/markdowns').syncFileSystemToMarkdowns() // TODO This is async yet we're assuming it will always complete before user fires events! fortunately were lucky every time. but this is dangerous.
 
-<<<<<<< HEAD
 app.use('/', require('./server/routes'))
-=======
 app.delete('/delete/:fileName', (request, response) => {
   let dir = __dirname + '/data/' + request.params.fileName
 
@@ -35,13 +33,6 @@ app.delete('/delete/:fileName', (request, response) => {
     response.sendStatus(200)
   })
 })
-
-app.post('/saveFile', (request, response) => {
-  let dir = __dirname + '/data/' + request.body.fileName
-  fs.writeFile(dir, request.body.fileText)
-  response.sendStatus(200)
-})
->>>>>>> origin/day-4
 
 app.use((request, response) => {
   response.render('not_found')

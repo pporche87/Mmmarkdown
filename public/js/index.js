@@ -65,7 +65,7 @@ const renderFileFromSidebar = () => {
 
 const saveFile = () => {
   const port = 3000
-  const url = `http://127.0.0.1:${port}/saveFile`
+  const url = `http://127.0.0.1:${port}/markdowns/saveFile`
   const readmeFile = {
     fileName: $('.menu h4').text(),
     fileText: $('.text-area.editor').val()
