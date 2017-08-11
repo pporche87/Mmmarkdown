@@ -4,7 +4,6 @@ const Markdowns = require('../../models/markdowns')
 router.get('/:fileName', (request, response) => {
   Markdowns.getMarkdown(request.params.fileName)
     .then( fileInfo => {
-      console.log('fileInfo::', fileInfo)
       response.send(fileInfo)
     })
 })
