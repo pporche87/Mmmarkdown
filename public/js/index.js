@@ -124,7 +124,9 @@ const fetchFileFromCookie = (fileName) => {
       'Content-Type': 'application/json'
     }
   })
-    .then(fileContent => fileContent.json())
+    .then(fileContent => {
+      return fileContent.json()
+    })
     .then((fileContent) => {
       const markdownText = $('.text-area.editor')
 

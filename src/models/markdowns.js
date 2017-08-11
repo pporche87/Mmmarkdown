@@ -3,10 +3,11 @@ const path = require('path')
 const fs = require('../helpers/fs')
 const arrayFunctions = require('../helpers/array')
 const Errors = require('../config/errors.json')
+const util = require('util')
 
 const syncFileSystemToMarkdowns = () =>
   markdowns.deleteAll()
-    .then( () => fs.readdir_promise((path.join(__dirname, '../data/'))) )
+    .then( () => util.promisify(fs.readdir)((path.join(__dirname, '../data/'))) )
     .then( file_names => 
       Promise.all( file_names.map(file_name => markdowns.createMarkdown(file_name)) )
     )
@@ -14,7 +15,7 @@ const syncFileSystemToMarkdowns = () =>
 const getMarkdowns = () =>
   Promise.all([
     markdowns.getMarkdowns(),
-    fs.readdir_promise((path.join(__dirname, '../data/')))
+    util.promisify(fs.readdir)((path.join(__dirname, '../data/')))
   ])
     .then( results => {
       return {
@@ -31,11 +32,8 @@ const getMarkdowns = () =>
     })
 
 const getMarkdown = file_name =>
-  fs.readFile(path.join(__dirname, '../data/', file_name), 'utf8')
-    .then( (error, contents) => {
-      if (error) throw error
-      return { fileText: contents, fileName: file_name }
-    })
+  util.promisify(fs.readFile)(path.join(__dirname, '../data/', file_name), 'utf8')
+    .then( (contents) => ({ fileText: contents, fileName: file_name }))
 
 const createMarkdown = (file_name, file_content) =>
   Promise.all([
