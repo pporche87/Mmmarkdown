@@ -5,26 +5,19 @@ $(document).ready(() => {
   newFile()
   renderFileFromSidebar()
   deleteFile()
-  // countWords()
 })
 
 const initializeTextArea = () => {
   const editor = $('.text-area.editor')
 
   editor.keyup(populatePreview)
-
 }
 
 const countWords = () => {
   let wordCount = $('.text-area.editor').val()
-  // console.log(wordCount);
   wordCount = wordCount.replace(/(^\s*)|(\s*$)/gi,'')
   wordCount = wordCount.replace(/[ ]{2,}/gi,' ')
   wordCount = wordCount.replace(/\n /,'\n')
-  // console.log(wordCount.replace(/(^\s*)|(\s*$)/gi,''));
-  // console.log(wordCount.replace(/[ ]{2,}/gi,' '));
-  // console.log(wordCount.replace(/\n /,'\n'));
-  console.log(wordCount.split(' ').length);
   $('#word-count').html(`${wordCount.split(' ').length} words`)
 }
 
@@ -70,6 +63,7 @@ const saveFile = () => {
     fileName: $('.menu h4').text(),
     fileText: $('.text-area.editor').val()
   }
+  alert(`Save file: ${readmeFile.fileName}`)
   Cookies.set('fileName', readmeFile.fileName, { expires: 30 })
   postToServer(url, readmeFile)
 }
@@ -95,7 +89,7 @@ const deleteFile = () => {
           $('.text-area.editor').val('')
           populatePreview()
         } else {
-          console.log('Error')
+          console.log('Error') // eslint-disable-line no-console
         }
       })
   })
@@ -112,10 +106,10 @@ const postToServer = (url, readmeFile) => {
     body: JSON.stringify(readmeFile)
   })
     .then(() => {
-      console.log(`${readmeFile.fileName} was saved to the server.`)
+      console.log(`${readmeFile.fileName} was saved to the server.`) // eslint-disable-line no-console
     })
     .catch((error) => {
-      console.log(`There was an error saving ${readmeFile.fileName} to the server. Error: ${error}`)
+      console.log(`There was an error saving ${readmeFile.fileName} to the server. Error: ${error}`) // eslint-disable-line no-console
     })
 }
 
@@ -138,7 +132,7 @@ const fetchFileFromCookie = (fileName) => {
       populatePreview()
     })
     .catch((error) => {
-      console.log(`There was an error fetching the file content from the file. ${error}`)
+      console.log(`There was an error fetching the file content from the file. ${error}`) // eslint-disable-line no-console
       throw error
     })
 }

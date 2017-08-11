@@ -6,6 +6,10 @@ The application uses `Node.js` and `Express.js` to build a full-stack applicatio
 
 The application makes use of `Knex.js` for it's database configuration, `cookie-session` to establish a cookie session, and `pug` as its HTML templating language.
 
+# Preview
+
+![Mmmarkdown Gif](/public/Mmmarkdown.gif)
+
 # Installation  
 
 type the following in your terminal

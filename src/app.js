@@ -17,7 +17,6 @@ app.get('/', (request, response) => {
     if (error) {
       throw error
     } else {
-      console.log(files);
       response.render('index', {files: files})
     }
   })
