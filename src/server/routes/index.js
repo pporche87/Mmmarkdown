@@ -8,7 +8,6 @@ router.get('/', (request, response) => {
   Markdowns.getMarkdowns()
     .then()
   fs.readdir(path.join(__dirname, '../../data/'), (error, files) => {
-    console.log('stuff: ', error, files)
     if (error) {
       throw error
     } else {

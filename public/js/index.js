@@ -68,7 +68,7 @@ const postToServer = (url, readmeFile) => {
 
 const fetchFileFromCookie = (fileName) => {
   const port = 3000
-  const url = `http://127.0.0.1:${port}/${fileName}`
+  const url = `http://127.0.0.1:${port}/markdowns/${fileName}`
   fetch(url, {
     method: 'GET',
     headers: {
@@ -76,7 +76,9 @@ const fetchFileFromCookie = (fileName) => {
       'Content-Type': 'application/json'
     }
   })
-    .then(fileContent => fileContent.json())
+    .then(fileContent => {
+      return fileContent.json()
+    })
     .then((fileContent) => {
       const markdownText = $('.text-area.editor')
 
