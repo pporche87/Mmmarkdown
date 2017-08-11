@@ -1,10 +1,14 @@
+/* global $ */
+/* global marked */
+/* global countWords */
+
 $(document).ready(() => {
   initializeTextArea()
   initializeSaveButton()
   cookieCheck()
   newFile()
   renderFileFromSidebar()
-  deleteFile()
+  setupDeleteFileHandler()
 })
 
 const initializeTextArea = () => {
@@ -13,12 +17,8 @@ const initializeTextArea = () => {
   editor.keyup(populatePreview)
 }
 
-const countWords = () => {
-  let wordCount = $('.text-area.editor').val()
-  wordCount = wordCount.replace(/(^\s*)|(\s*$)/gi,'')
-  wordCount = wordCount.replace(/[ ]{2,}/gi,' ')
-  wordCount = wordCount.replace(/\n /,'\n')
-  $('#word-count').html(`${wordCount.split(' ').length} words`)
+const updateWordCount = () => {
+  $('#word-count').html(`${countWords( $('.text-area.editor').val() )} words`)
 }
 
 const populatePreview = () => {
@@ -26,7 +26,7 @@ const populatePreview = () => {
   const preview = $('.text-area.preview')
 
   preview.html(marked(editor.val()))
-  countWords()
+  updateWordCount()
 }
 
 const initializeSaveButton = () => {
@@ -43,16 +43,15 @@ const newFile = () => {
     $('.text-area.editor').val('')
     $('.render-list').append(`<li class="document"><h4>${newFileName}<span><i class="fa fa-trash"></i></span></h4></li>`)
 
-    deleteFile()
+    renderFileFromSidebar()
+    setupDeleteFileHandler()
     populatePreview()
   })
 }
 
 const renderFileFromSidebar = () => {
-  $('ul.render-list li h4').click((event) => {
-    const fileToRenderName = event.target.innerText
-
-    fetchFileFromCookie(fileToRenderName)
+  $('ul.render-list li h4').off('click').click((event) => {
+    fetchFileFromCookie(event.target.innerText)
   })
 }
 
@@ -68,7 +67,7 @@ const saveFile = () => {
   postToServer(url, readmeFile)
 }
 
-const deleteFile = () => {
+const setupDeleteFileHandler = () => {
   $('ul.render-list li span').click((event) => {
     event.stopPropagation()
     const fileName = event.target.parentElement.parentElement.innerText
@@ -124,13 +123,11 @@ const fetchFileFromCookie = (fileName) => {
       'Content-Type': 'application/json'
     }
   })
-    .then(fileContent => {
-      return fileContent.json()
-    })
+    .then(fileContent => fileContent.json() )
     .then((fileContent) => {
       const markdownText = $('.text-area.editor')
 
-      markdownText.text(fileContent.fileText)
+      markdownText.val(fileContent.fileText)
       populatePreview()
     })
     .catch((error) => {

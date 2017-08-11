@@ -23,15 +23,17 @@ app.use('/', (request, response, next) => {
 // require('../test/tests.js')() // TODO: Replace quick tests with mocha-chai unit tests and use seperate database for testing
 
 require('./models/markdowns').syncFileSystemToMarkdowns() // TODO This is async yet we're assuming it will always complete before user fires events! fortunately were lucky every time. but this is dangerous.
+  .then( () => {
 
-app.use('/', require('./server/routes'))
-
-app.use((request, response) => {
-  response.render('not_found')
-})
-
-const port = process.env.PORT || 3000
-
-app.listen(port, () => {
-  console.log(`App listening on: ${process.env.APPLICATION_URL}:${port}`) // eslint-disable-line no-console
-})
+    app.use('/', require('./server/routes'))
+    
+    app.use((request, response) => {
+      response.render('not_found')
+    })
+    
+    const port = process.env.PORT || 3000
+    
+    app.listen(port, () => {
+      console.log(`App listening on: ${process.env.APPLICATION_URL}:${port}`) // eslint-disable-line no-console
+    })
+  })

@@ -86,7 +86,14 @@ h4 {
   border-bottom: 1px solid #9d9d9d;
  	margin: 1em 0;
  	padding: 10px;
+}
+
+ul.render-list li h4 {
 	cursor: pointer;
+}
+
+ul.render-list li span {
+	cursor: not-allowed;
 }
 
 .document-name {
