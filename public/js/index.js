@@ -128,7 +128,7 @@ const fetchFileFromCookie = (fileName) => {
       console.log('==>', fileContent.fileText)
       const markdownText = $('.text-area.editor')
 
-      markdownText.text(fileContent.fileText)
+      markdownText.val(fileContent.fileText)
       populatePreview()
     })
     .catch((error) => {
