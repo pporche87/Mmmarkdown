@@ -1,6 +1,6 @@
 const markdowns = require('../database/markdowns')
 const path = require('path')
-const fs = require('../helpers/fs')
+const fs = require('fs')
 const arrayFunctions = require('../helpers/array')
 const Errors = require('../config/errors.json')
 const util = require('util')
