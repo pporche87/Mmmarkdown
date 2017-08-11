@@ -15,7 +15,7 @@ router.get('/', (request, response) => {
     })
 })
 
-router.get('/saveFile', (request, response) => {
+router.post('/saveFile', (request, response) => {
   Markdowns.createMarkdown(request.body.fileName, request.body.fileText)
     .then( () => {
       console.log('Succeeded')

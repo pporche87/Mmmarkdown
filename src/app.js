@@ -26,13 +26,8 @@ require('./models/markdowns').syncFileSystemToMarkdowns() // TODO This is async 
 
 app.use('/', require('./server/routes'))
 
-app.delete('/delete/:fileName', (request, response) => {
-  let dir = __dirname + '/data/' + request.params.fileName
-
-  fs.unlink(dir, (error) => {
-    if (error) throw error
-    response.sendStatus(200)
-  })
+app.use((request, response) => {
+  response.render('not_found')
 })
 
 const port = process.env.PORT || 3000
